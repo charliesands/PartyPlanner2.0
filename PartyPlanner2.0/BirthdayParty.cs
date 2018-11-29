@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace PartyPlanner2._0
 {
-    class BirthdayParty
+    class BirthdayParty : Party
     {
-        override public decimal Cost { get; set; }
-
-        
         public string CakeWriting { get; set; }
 
         public BirthdayParty(int numberOfPeople, bool fancyDecorations, string cakeWriting)
@@ -59,12 +56,11 @@ namespace PartyPlanner2._0
             }
         }
 
-        public decimal Cost
+        override public decimal Cost
         {
             get
             {
-                decimal totalCost = CalculateCostOfDecorations();
-                totalCost += CostOfFoodPerPerson * NumberOfPeople;
+                decimal totalCost = base.Cost;
                 decimal cakeCost;
                 if (CakeSize() == 8)
                     cakeCost = 40M + ActualLength * .25M;

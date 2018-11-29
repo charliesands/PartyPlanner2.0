@@ -7,10 +7,8 @@ using System.Windows.Forms;
 
 namespace PartyPlanner2._0
 {
-    class DinnerParty
-    {
-        override public decimal Cost { get; set; }
-        
+    class DinnerParty : Party
+    {        
         public bool HealthyOption { get; set; }
 
         public DinnerParty(int numberOfPeople, bool healthyOption, bool fancyDecorations)
@@ -19,8 +17,6 @@ namespace PartyPlanner2._0
             HealthyOption = healthyOption;
             FancyDecorations = fancyDecorations;
         }
-
-        
 
         private decimal CalculateCostOfBeveragesPerPerson()
         {
@@ -36,12 +32,12 @@ namespace PartyPlanner2._0
             return costOfBeveragesPerPerson;
         }
 
-        public decimal Cost
+        override public decimal Cost
         {
             get
             {
-                decimal totalCost = CalculateCostOfDecorations();
-                totalCost += ((CalculateCostOfBeveragesPerPerson() + CostOfFoodPerPerson) * NumberOfPeople);
+                decimal totalCost = base.Cost;
+                totalCost += CalculateCostOfBeveragesPerPerson() * NumberOfPeople;
                 if (HealthyOption)
                 {
                     totalCost *= .95M;

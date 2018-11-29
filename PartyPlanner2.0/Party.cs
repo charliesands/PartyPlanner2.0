@@ -11,7 +11,18 @@ namespace PartyPlanner2._0
         public const int CostOfFoodPerPerson = 25;
         public int NumberOfPeople { get; set; }
         public bool FancyDecorations { get; set; }
-        virtual public decimal Cost { get; set; }
+
+        virtual public decimal Cost
+        {
+            get
+            {
+                decimal totalCost = CalculateCostOfDecorations();
+                totalCost += CostOfFoodPerPerson * NumberOfPeople;
+                if (NumberOfPeople > 12)
+                    totalCost += 100;
+                return totalCost;
+            }
+        }
 
         private decimal CalculateCostOfDecorations()
         {
